@@ -24,31 +24,30 @@
 package com.googlecode.jthaipdf.jasperreports.engine;
 
 import java.io.OutputStream;
-
-import com.googlecode.jthaipdf.jasperreports.engine.export.ThaiJRPdfExporter;
-
-
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.pdf.JRPdfExporter;
 
 
-public class ThaiExporterManager {
+public final class ThaiExporterManager {
 
-	public static void exportReportToPdfFile(JasperPrint jasperPrint, String fileName) throws JRException {
-		ThaiJRPdfExporter exporter = new ThaiJRPdfExporter();
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, fileName);
+    private ThaiExporterManager() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
 
-		exporter.exportReport();
+    public static void exportReportToPdfFile(JasperPrint jasperPrint, String fileName) throws JRException {
+        var exporter = new JRPdfExporter();
+		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(fileName));
+        exporter.exportReport();
+    }
 
-	}
-
-	public static void exportReportToPdfStream(JasperPrint jasperPrint, OutputStream out) throws JRException {
-		ThaiJRPdfExporter exporter = new ThaiJRPdfExporter();
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
-
-		exporter.exportReport();
-	}
+    public static void exportReportToPdfStream(JasperPrint jasperPrint, OutputStream out) throws JRException {
+        var exporter = new JRPdfExporter();
+        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(out));
+        exporter.exportReport();
+    }
 }

@@ -4,12 +4,31 @@ The Thai language PDF generating utilities for Java
 ==========================================================================
 
 Using from iText:
-  - just replace all Chunk class with ThaiChunk
-  - or wrap Chunk instant inside ThaiChunk class
+
+- just replace all Chunk class with ThaiChunk
+- or wrap Chunk instant inside ThaiChunk class
 
 Using from JasperReports:
-    - replace all JRPdfExporter class with ThaiJRPdfExporter class
-    - or use ThaiExporterManager to export to file or stream
 
+- ~~replace all JRPdfExporter class with ThaiJRPdfExporter class~~
+- or use ThaiExporterManager to export to file or stream
 
 Author: Virask Dungsriakaew (virask@gmail.com)
+
+---
+
+Prerequisites
+
+- [JDK](https://jdk.java.net/) => 21
+
+---
+
+How to use
+
+Adding `jthaipdf` jar in your project and setting a configuration property in `jasperreports.properties`
+
+The configuration property that needs to be set is:
+
+```properties
+net.sf.jasperreports.export.pdf.producer.factory=com.googlecode.jthaipdf.common.ThaiPdfProducerFactory
+```
