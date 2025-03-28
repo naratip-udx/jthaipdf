@@ -1,7 +1,6 @@
-JThaiPDF
-==========================================================================
+# JThaiPDF
+
 The Thai language PDF generating utilities for Java
-==========================================================================
 
 Using from iText:
 
@@ -15,15 +14,11 @@ Using from JasperReports:
 
 Author: Virask Dungsriakaew (virask@gmail.com)
 
----
-
-Prerequisites
+## Prerequisites
 
 - [JDK](https://jdk.java.net/) => 21
 
----
-
-How to use
+## How to use
 
 Adding `jthaipdf` jar in your project and setting a configuration property in `jasperreports.properties`
 
