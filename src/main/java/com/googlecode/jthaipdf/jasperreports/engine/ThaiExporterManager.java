@@ -24,9 +24,13 @@
 package com.googlecode.jthaipdf.jasperreports.engine;
 
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.export.ExporterInputItem;
 import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleExporterInputItem;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.pdf.JRPdfExporter;
 
@@ -47,6 +51,16 @@ public final class ThaiExporterManager {
     public static void exportReportToPdfStream(JasperPrint jasperPrint, OutputStream out) throws JRException {
         var exporter = new JRPdfExporter();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(out));
+        exporter.exportReport();
+    }
+
+    public static void exportMultipleReportToPdfStream(List<JasperPrint> jasperPrints, OutputStream out) throws JRException {
+        List<ExporterInputItem> items = new ArrayList<>();
+        jasperPrints.forEach(jp -> items.add(new SimpleExporterInputItem(jp)));
+
+        var exporter = new JRPdfExporter();
+        exporter.setExporterInput(new SimpleExporterInput(items));
         exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(out));
         exporter.exportReport();
     }
